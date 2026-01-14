@@ -1,0 +1,56 @@
+generator client {
+  provider   = "prisma-client-js"
+  output     = "../generated/prisma"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model articles {
+  id           Int         @id @default(autoincrement()) @db.UnsignedInt
+  designation  String      @db.VarChar(30)
+  marque       String      @db.VarChar(20)
+  reference    String      @db.VarChar(30)
+  qtestock     Int
+  prix         Float
+  imageart     String      @db.VarChar(100)
+  scategorieID Int         @db.UnsignedInt
+  created_at   String?     @db.VarChar(24)
+  updated_at   String?     @db.VarChar(24)
+  scategories  scategories @relation(fields: [scategorieID], references: [id], onUpdate: Restrict, map: "articles_scategorieid_foreign")
+
+  @@index([scategorieID], map: "articles_scategorieid_foreign")
+}
+
+model categories {
+  id             Int           @id @default(autoincrement()) @db.UnsignedInt
+  nomcategorie   String        @unique(map: "categories_nomcategorie_unique") @db.VarChar(30)
+  imagecategorie String        @db.VarChar(100)
+  created_at     String?       @db.VarChar(24)
+  updated_at     String?       @db.VarChar(24)
+  scategories    scategories[]
+}
+
+model scategories {
+  id              Int        @id @default(autoincrement()) @db.UnsignedInt
+  nomscategorie   String     @db.VarChar(100)
+  imagescategorie String     @db.VarChar(100)
+  categorieID     Int        @db.UnsignedInt
+  created_at      String?    @db.VarChar(24)
+  updated_at      String?    @db.VarChar(24)
+  articles        articles[]
+  categories      categories @relation(fields: [categorieID], references: [id], onUpdate: Restrict, map: "scategories_categorieid_foreign")
+
+  @@index([categorieID], map: "scategories_categorieid_foreign")
+}
+
+model users {
+  id         Int     @id @default(autoincrement()) @db.UnsignedInt
+  name       String  @db.VarChar(100)
+  email      String  @unique(map: "users_email_unique") @db.VarChar(191)
+  password   String  @db.VarChar(255)
+  created_at String? @db.VarChar(24)
+  updated_at String? @db.VarChar(24)
+}
