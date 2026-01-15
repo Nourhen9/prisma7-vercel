@@ -8,8 +8,8 @@ CREATE TABLE `articles` (
     `prix` DOUBLE NOT NULL,
     `imageart` VARCHAR(100) NOT NULL,
     `scategorieID` INTEGER UNSIGNED NOT NULL,
-    `created_at` VARCHAR(24) NULL,
-    `updated_at` VARCHAR(24) NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
 
     INDEX `articles_scategorieid_foreign`(`scategorieID`),
     PRIMARY KEY (`id`)
@@ -20,8 +20,8 @@ CREATE TABLE `categories` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `nomcategorie` VARCHAR(30) NOT NULL,
     `imagecategorie` VARCHAR(100) NOT NULL,
-    `created_at` VARCHAR(24) NULL,
-    `updated_at` VARCHAR(24) NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
 
     UNIQUE INDEX `categories_nomcategorie_unique`(`nomcategorie`),
     PRIMARY KEY (`id`)
@@ -33,8 +33,8 @@ CREATE TABLE `scategories` (
     `nomscategorie` VARCHAR(100) NOT NULL,
     `imagescategorie` VARCHAR(100) NOT NULL,
     `categorieID` INTEGER UNSIGNED NOT NULL,
-    `created_at` VARCHAR(24) NULL,
-    `updated_at` VARCHAR(24) NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
 
     INDEX `scategories_categorieid_foreign`(`categorieID`),
     PRIMARY KEY (`id`)
@@ -46,8 +46,8 @@ CREATE TABLE `users` (
     `name` VARCHAR(100) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
-    `created_at` VARCHAR(24) NULL,
-    `updated_at` VARCHAR(24) NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
 
     UNIQUE INDEX `users_email_unique`(`email`),
     PRIMARY KEY (`id`)

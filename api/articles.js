@@ -1,11 +1,14 @@
 // api/articles.js
 import { PrismaClient } from '@prisma/client'
+import { createAdapterFromUrl } from '../lib/prisma'
 
 // Singleton Prisma (obligatoire pour Vercel)
 const globalForPrisma = global
 const prisma =
   globalForPrisma.prisma ||
-  new PrismaClient()
+  new PrismaClient({
+     adapter: createAdapterFromUrl(process.env.DATABASE_URL),
+  })
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
