@@ -1,6 +1,6 @@
 // api/scategories.js
 import { PrismaClient } from '@prisma/client'
-import { createAdapterFromUrl } from '../lib/prisma'
+import { createAdapterFromUrl } from '../lib/db.js'
 
 // Singleton Prisma (obligatoire pour Vercel)
 const globalForPrisma = global
