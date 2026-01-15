@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default async function handler(req, res) {
-  // ⚠️ NE PAS recréer Prisma ici
+   console.log('🚀 API articles called')
   const { method, query, body } = req // ← ✅ Extraction obligatoire
 
   try {
